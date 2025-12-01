@@ -1434,7 +1434,7 @@ function clearForm() {
 }
 
 btnContinuar.addEventListener('click', function () {
-    alert('Continuar: en futuras versiones se procesará la información y se confirmará el pago. Subtotal: ₡' + subtotal.toLocaleString('es-CR'));
+    alert('Se confirmará el pago. Subtotal: ₡' + subtotal.toLocaleString('es-CR'));
 });
 // Precios según SINAC (valores aproximados en colones costarricenses)
 const PRECIOS = {
@@ -1445,7 +1445,6 @@ const PRECIOS = {
 };
 // Agregar después del código de precios
 let cedulasRegistradas = new Set();
-let subtotal = 0;
 
 // Función para validar fecha de nacimiento no futura
 function validarFechaNacimiento(fecha) {
@@ -1630,21 +1629,6 @@ const subtotalHTML = `
 
 // Insertar el subtotal después del precio individual
 document.querySelector('#precioReserva').closest('.mb-2').insertAdjacentHTML('afterend', subtotalHTML);
-
-// Modificar la función de registro para incluir validación de fecha de nacimiento
-const btnRegistrarOriginal = document.getElementById('btnRegistrar');
-btnRegistrarOriginal.addEventListener('click', function() {
-    const fechaNacimiento = document.getElementById('inputFechaNacimiento').value;
-    const fechaReserva = document.getElementById('inputFechaReserva').value;
-    
-    if (!fechaReserva) {
-        alert('Por favor seleccione la fecha de reserva.');
-        return;
-    }
-    
-    // Continuar con el registro original...
-    registrarVisitanteOriginal();
-});
 
 // Guardar referencia a la función original de registro
 function registrarVisitanteOriginal() {
