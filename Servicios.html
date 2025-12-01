@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <title>Trámites y Servicios</title>
+
+    <style>
+        :root { --sinac-green: #4CAF50; }
+
+        body {
+            background: url("imagenes/fondo_bosque.png");
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            backdrop-filter: blur(1px);
+        }
+
+        .bg-overlay {
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(3px);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .card-sinac {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+            padding: 20px;
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .active-item {
+            background: var(--sinac-green);
+            color: #fff !important;
+        }
+
+        .text-sinac { color: var(--sinac-green); }
+
+        .btn-sinac {
+            background: var(--sinac-green);
+            color: #fff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-overlay">
+
+<!-- NAVBAR -->
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="imagenes/sinac_logo.png" style="height:33px;" class="me-2">
+            <span class="fw-semibold text-sinac fs-5">SINAC</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-3">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                </li>
+<!-- DROPDOWN (ÚNICO DROPDOWN) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Áreas de Conservación
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="Áreas de Conservación-pag.html">Ver Todas las Áreas</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAHN">Arenal Huetar Norte</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAT">Arenal Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACCVC">Cordillera Volcánica Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACG">Guanacaste</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAC">La Amistad Caribe</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAP">La Amistad Pacífico</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACMIC">Isla del Coco</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOSA">Osa</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOPAC">Pacífico Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACT">Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACTO">Tortuguero</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Servicios.html">Trámites y Servicios</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Noticias.html">Noticias</a>
+                </li>
+
+                        <!-- Visible solo si NO hay sesión -->
+                <li class="nav-item" id="navLogin">
+                    <a class="nav-link" href="Login.html">Iniciar Sesión</a>
+                </li>
+
+                <!-- Visible cuando SÍ hay sesión -->
+                <li class="nav-item" id="navUsuario" style="display:none;">
+                    <a class="nav-link disabled fw-semibold" href="#"></a>
+                </li>
+
+                <!-- Botón de cerrar sesión -->
+                <li class="nav-item" id="navLogout" style="display:none;">
+                    <a class="nav-link text-danger" href="#">Cerrar Sesión</a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex ms-auto" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4 px-5">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-3">
+            <div class="card-sinac">
+
+                <h6 class="fw-semibold">Servicios</h6>
+
+                <div class="sidebar-item active-item mt-3" onclick="mostrar('forestal')">
+                    <i class="bi bi-journal-text me-2"></i>
+                    Permisos forestales
+                </div>
+
+                <div class="sidebar-item text-secondary mt-3" onclick="mostrar('investigacion')">
+                    <i class="bi bi-search me-2"></i>
+                    Permisos de investigación
+                </div>
+
+                <div class="sidebar-item text-secondary mt-3" onclick="mostrar('denuncia')">
+                    <i class="bi bi-file-earmark me-2"></i>
+                    Denuncia ambiental
+                </div>
+
+                <div class="sidebar-item text-secondary mt-3" onclick="mostrar('certificaciones')">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Certificaciones
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="col-9">
+            <div class="card-sinac" id="contenido">
+
+                <!-- Permisos Forestales -->
+                <div id="forestal">
+
+                    <div class="text-center">
+                        <i class="bi bi-layers-fill fs-1 text-sinac"></i>
+                        <h5 class="mt-2">Permisos Forestales</h5>
+                        <p class="text-secondary">
+                            Solicita autorización para realizar actividades forestales de manera sostenible y legal.
+                        </p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h6 class="fw-semibold text-sinac">
+                                <i class="bi bi-check-circle me-1"></i> Requisitos
+                            </h6>
+                            <ul class="list-unstyled mt-3">
+                                <li><i class="bi bi-check-circle text-success"></i> Cédula vigente</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Plano catastrado</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Estudio ambiental</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Carta compromiso</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Plan de manejo</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-6">
+                            <h6 class="fw-semibold text-sinac">
+                                <i class="bi bi-file-text me-1"></i> Base Normativa
+                            </h6>
+                            <ul class="list-unstyled mt-3">
+                                <li> Ley Forestal 7575</li>
+                                <li> Reglamento Forestal</li>
+                                <li> Decreto 25721-MINAE</li>
+                                <li> Normativa vigente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Investigación -->
+                <div id="investigacion" style="display:none;">
+                    <div class="text-center">
+                        <i class="bi bi-search text-sinac fs-1"></i>
+                        <h5 class="mt-2">Permisos de Investigación</h5>
+                        <p class="text-secondary">
+                            Autorización para realizar estudios científicos dentro de Áreas Silvestres Protegidas.
+                        </p>
+                    </div>
+
+                    <h6 class="fw-semibold text-sinac mt-3">Requisitos</h6>
+                    <ul>
+                        <li>Carta de solicitud</li>
+                        <li>Resumen del proyecto</li>
+                        <li>Cronograma de actividades</li>
+                        <li>CV del investigador principal</li>
+                        <li>Póliza de riesgos</li>
+                    </ul>
+
+                    <h6 class="fw-semibold text-sinac">Normativa</h6>
+                    <ul>
+                        <li>Ley de Conservación de Vida Silvestre</li>
+                        <li>Ley de Biodiversidad</li>
+                        <li>Reglamento de Investigación Científica</li>
+                    </ul>
+                </div>
+
+                <!-- Denuncia -->
+                <div id="denuncia" style="display:none;">
+                    <div class="text-center">
+                        <i class="bi bi-exclamation-triangle text-sinac fs-1"></i>
+                        <h5 class="mt-2">Denuncia Ambiental</h5>
+                        <p class="text-secondary">
+                            Reporta actividades ilegales que afecten los recursos naturales.
+                        </p>
+                    </div>
+
+                    <h6 class="fw-semibold text-sinac mt-3">Se puede denunciar:</h6>
+                    <ul>
+                        <li>Tala ilegal</li>
+                        <li>Cacería ilegal</li>
+                        <li>Contaminación de ríos</li>
+                        <li>Construcciones ilegales</li>
+                        <li>Incendios provocados</li>
+                    </ul>
+
+                    <h6 class="fw-semibold text-sinac">Canales de denuncia:</h6>
+                    <ul>
+                        <li><b>1192</b> – Línea ambiental</li>
+                        <li>Correo: denuncias@sinac.go.cr</li>
+                        <li>Policía (911) para emergencias</li>
+                    </ul>
+                </div>
+
+                <!-- Certificaciones -->
+                <div id="certificaciones" style="display:none;">
+                    <div class="text-center">
+                        <i class="bi bi-check-circle text-sinac fs-1"></i>
+                        <h5 class="mt-2">Certificaciones Ambientales</h5>
+                        <p class="text-secondary">
+                            Documentos que garantizan el origen legal y sostenible de productos forestales.
+                        </p>
+                    </div>
+
+                    <h6 class="fw-semibold text-sinac mt-3">Tipos de certificaciones</h6>
+                    <ul>
+                        <li>CITES</li>
+                        <li>Certificado de Origen</li>
+                        <li>Certificación de Aprovechamiento</li>
+                    </ul>
+
+                    <h6 class="fw-semibold text-sinac">Requisitos</h6>
+                    <ul>
+                        <li>Solicitud escrita</li>
+                        <li>Documentos de propiedad</li>
+                        <li>Inventario del recurso</li>
+                        <li>Comprobante de procedencia</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- --------------------------- -->
+<!-- SCRIPTS DEL LOGIN COMPLETO -->
+<!-- --------------------------- -->
+
+<script>
+// Base simulada
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
+    { email: "admin@sinac.go.cr", password: "123456", nombre: "Administrador SINAC" },
+    { email: "usuario@correo.com", password: "sinac2024", nombre: "Usuario General" }
+];
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+// Mostrar alerta
+function mostrarMensaje(msg, tipo="danger") {
+    const alerta = document.querySelector("#alerta");
+    alerta.className = "alert alert-" + tipo;
+    alerta.textContent = msg;
+    alerta.style.display = "block";
+}
+
+// LOGIN
+document.querySelector("#btnLogin").addEventListener("click", function() {
+    const email = document.querySelector("#email").value;
+    const pass = document.querySelector("#password").value;
+
+    const userFound = usuarios.find(u => u.email === email && u.password === pass);
+
+    if (!userFound) {
+        mostrarMensaje("❌ Credenciales incorrectas.");
+        return;
+    }
+
+    localStorage.setItem("usuarioActual", JSON.stringify(userFound));
+    window.location.href = "index.html";
+});
+
+// REGISTRO
+document.querySelector("#btnRegistro").addEventListener("click", function() {
+    const nom = document.querySelector("#regNombre").value;
+    const cor = document.querySelector("#regCorreo").value;
+    const p1 = document.querySelector("#regPass1").value;
+    const p2 = document.querySelector("#regPass2").value;
+
+    if (p1 !== p2) {
+        mostrarMensaje("❌ Las contraseñas no coinciden.");
+        return;
+    }
+
+    if (usuarios.find(u => u.email === cor)) {
+        mostrarMensaje("❌ El correo ya existe.");
+        return;
+    }
+
+    usuarios.push({ nombre: nom, email: cor, password: p1 });
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    mostrarMensaje("✔ Registro exitoso. Ahora inicia sesión.", "success");
+});
+
+// CAMBIO ENTRE LOGIN / REGISTRO / RECUPERAR
+document.querySelector("#tabLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+
+    tabLogin.classList.add("tab-active");
+    tabReg.classList.remove("tab-active");
+});
+
+document.querySelector("#tabReg").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "block";
+    formRecuperar.style.display = "none";
+
+    tabReg.classList.add("tab-active");
+    tabLogin.classList.remove("tab-active");
+});
+
+document.querySelector("#recuperarLink").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "block";
+});
+
+document.querySelector("#volverLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+});
+
+// COLAPSAR/EXPANDIR CONTRASEÑA
+document.querySelector("#togglePass").addEventListener("click", () => {
+    const pass = document.querySelector("#password");
+    if (pass.type === "password") {
+        pass.type = "text";
+        togglePass.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        pass.type = "password";
+        togglePass.classList.replace("bi-eye-slash", "bi-eye");
+    }
+});
+</script>
+
+<!-- SCRIPT UNIVERSAL DE SESIÓN -->
+<script>
+const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+const loginItem = document.querySelector("#navLogin");
+const usuarioItem = document.querySelector("#navUsuario");
+const usuarioLink = usuarioItem ? usuarioItem.querySelector("a") : null;
+const logoutItem = document.querySelector("#navLogout");
+
+if (usuario) {
+    if (loginItem) loginItem.style.display = "none";
+    if (usuarioItem) usuarioItem.style.display = "block";
+    if (usuarioLink) usuarioLink.textContent = "Hola, " + usuario.nombre.split(" ")[0];
+    if (logoutItem) logoutItem.style.display = "block";
+} else {
+    if (usuarioItem) usuarioItem.style.display = "none";
+    if (logoutItem) logoutItem.style.display = "none";
+}
+
+// Logout
+if (logoutItem) {
+    logoutItem.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActual");
+        window.location.href = "Login.html";
+    });
+}
+</script>
+<script>
+function mostrar(seccion) {
+    document.querySelectorAll("#contenido > div").forEach(div => div.style.display = "none");
+    document.getElementById(seccion).style.display = "block";
+
+    document.querySelectorAll(".sidebar-item").forEach(i => i.classList.remove("active-item"));
+    event.target.closest(".sidebar-item").classList.add("active-item");
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

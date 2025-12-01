@@ -1,0 +1,66 @@
+:root {
+    --sinac-green: #4CAF50;
+}
+
+/* Fondo general */
+body {
+    background: url("../imagenes/fondo_bosque.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(1px);
+    color: #2b2b2b;
+}
+
+.bg-overlay {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(3px);
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+/* Navbar */
+.navbar-brand,
+.navbar-brand .brand-text {
+    color: var(--sinac-green) !important;
+    font-weight: 700;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--sinac-green) !important;
+    font-weight: 600;
+}
+
+/* Botones */
+.btn-sinac {
+    background: var(--sinac-green);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-sinac-outline {
+    border: 2px solid var(--sinac-green);
+    color: var(--sinac-green);
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Cards */
+.card-sinac {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+    padding: 20px;
+}
+
+/* Texto verde */
+.text-sinac { color: var(--sinac-green) !important; }
+
+/* Badge */
+.badge-sinac {
+    background: var(--sinac-green);
+    color: #fff;
+}

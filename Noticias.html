@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <title>Noticias SINAC</title>
+
+    <style>
+        :root {
+            --sinac-green: #4CAF50;
+            --sinac-green-dark: #0a8a60;
+        }
+
+        body {
+            background: url("imagenes/fondo_bosque.png");
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(1px);
+            color: #2b2b2b;
+        }
+
+        .card-rounded {
+            border-radius: 15px;
+        }
+
+        .img-fit {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #e8e8e8;
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        .chip.active {
+            background: var(--sinac-green);
+            color: white;
+        }
+
+        .chip:hover {
+            background: #d5d5d5;
+        }
+
+        /* Animation for expanding cards */
+        .expandable {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="imagenes/sinac_logo.png" style="height:33px;" class="me-2">
+            <span class="fw-semibold text-sinac fs-5">SINAC</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-3">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                </li>
+<!-- DROPDOWN (ÚNICO DROPDOWN) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Áreas de Conservación
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="Áreas de Conservación-pag.html">Ver Todas las Áreas</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAHN">Arenal Huetar Norte</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAT">Arenal Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACCVC">Cordillera Volcánica Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACG">Guanacaste</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAC">La Amistad Caribe</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAP">La Amistad Pacífico</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACMIC">Isla del Coco</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOSA">Osa</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOPAC">Pacífico Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACT">Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACTO">Tortuguero</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Servicios.html">Trámites y Servicios</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Noticias.html">Noticias</a>
+                </li>
+
+                        <!-- Visible solo si NO hay sesión -->
+                <li class="nav-item" id="navLogin">
+                    <a class="nav-link" href="Login.html">Iniciar Sesión</a>
+                </li>
+
+                <!-- Visible cuando SÍ hay sesión -->
+                <li class="nav-item" id="navUsuario" style="display:none;">
+                    <a class="nav-link disabled fw-semibold" href="#"></a>
+                </li>
+
+                <!-- Botón de cerrar sesión -->
+                <li class="nav-item" id="navLogout" style="display:none;">
+                    <a class="nav-link text-danger" href="#">Cerrar Sesión</a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex ms-auto" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+<div class="container py-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex align-items-center gap-2">
+            <img src="imagenes/sinac_logo.png" style="height:45px;">
+            <h3 class="fw-bold m-0">Noticias</h3>
+        </div>
+        <i class="bi bi-bell fs-3" style="color:#007a52; cursor:pointer;"></i>
+    </div>
+
+    <div class="row g-4" id="noticiasContainer">
+
+        <!-- NOTICIA LATERAL -->
+        <div class="col-md-4 noticia-item" data-category="Reporte">
+            <div class="card p-3 shadow-sm card-rounded">
+
+                <img src="imagenes/sinac_logo.png" class="img-fit mb-3">
+
+                <h6 class="fw-semibold">Reporte Ambiental</h6>
+
+                <p class="text-secondary" style="font-size:14px;">
+                    Actualización reciente sobre incendios forestales en el Área de Conservación Tempisque.
+                </p>
+
+                <button class="btn btn-outline-success w-100 expand-btn">
+                    <i class="bi bi-arrow-down"></i> Ver más
+                </button>
+
+                <div class="expandable mt-3">
+                    <p>El equipo del SINAC ha controlado el 80% del incendio registrado esta semana...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTICIA PRINCIPAL -->
+        <div class="col-md-8 noticia-item" data-category="Fauna">
+            <div class="card p-3 shadow-sm card-rounded">
+
+                <img src="https://www.descubramoscostarica.com/sites/default/files/styles/wide/public/2022-10/Parque%20Nacional%20Tortuguero%203.jpg.webp?itok=UJz_hdfp" class="img-fit mb-3">
+
+                <span class="badge bg-success mb-2">Fauna</span>
+
+                <h5 class="fw-semibold">Nueva especie descubierta en Tortuguero</h5>
+
+                <p class="text-secondary" style="font-size:14px;">
+                    Biólogos del SINAC han encontrado una especie endémica de rana en zonas húmedas del Caribe.
+                </p>
+
+                <button class="btn btn-success w-100 expand-btn">
+                    <i class="bi bi-arrow-down"></i> Ver más
+                </button>
+
+                <div class="expandable mt-3">
+                    <p>La nueva especie destaca por su pelaje y su canto particular...</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Chips -->
+    <div class="d-flex gap-3 mt-4 mb-4">
+        <div class="chip active" data-filter="Nuevo">Nuevo</div>
+        <div class="chip" data-filter="Investigaciones">Investigaciones</div>
+        <div class="chip" data-filter="Flora">Flora</div>
+        <div class="chip" data-filter="Fauna">Fauna</div>
+        <div class="chip" data-filter="Reporte">Reportes</div>
+    </div>
+
+    <!-- TARJETA INFERIOR -->
+    <div class="card p-4 shadow-sm card-rounded">
+        <img src="https://asuaire.com/blog/wp-content/uploads/2017/10/Imagenes-blog-02-min.jpg" class="img-fit mb-3">
+        <p class="text-secondary">
+            Este espacio puede mostrar noticias amplias, reportes especiales o investigaciones destacadas del SINAC.
+        </p>
+    </div>
+
+</div>
+<!-- --------------------------- -->
+<!-- SCRIPTS DEL LOGIN COMPLETO -->
+<!-- --------------------------- -->
+
+<script>
+// Base simulada
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
+    { email: "admin@sinac.go.cr", password: "123456", nombre: "Administrador SINAC" },
+    { email: "usuario@correo.com", password: "sinac2024", nombre: "Usuario General" }
+];
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+// Mostrar alerta
+function mostrarMensaje(msg, tipo="danger") {
+    const alerta = document.querySelector("#alerta");
+    alerta.className = "alert alert-" + tipo;
+    alerta.textContent = msg;
+    alerta.style.display = "block";
+}
+
+// LOGIN
+document.querySelector("#btnLogin").addEventListener("click", function() {
+    const email = document.querySelector("#email").value;
+    const pass = document.querySelector("#password").value;
+
+    const userFound = usuarios.find(u => u.email === email && u.password === pass);
+
+    if (!userFound) {
+        mostrarMensaje("❌ Credenciales incorrectas.");
+        return;
+    }
+
+    localStorage.setItem("usuarioActual", JSON.stringify(userFound));
+    window.location.href = "index.html";
+});
+
+// REGISTRO
+document.querySelector("#btnRegistro").addEventListener("click", function() {
+    const nom = document.querySelector("#regNombre").value;
+    const cor = document.querySelector("#regCorreo").value;
+    const p1 = document.querySelector("#regPass1").value;
+    const p2 = document.querySelector("#regPass2").value;
+
+    if (p1 !== p2) {
+        mostrarMensaje("❌ Las contraseñas no coinciden.");
+        return;
+    }
+
+    if (usuarios.find(u => u.email === cor)) {
+        mostrarMensaje("❌ El correo ya existe.");
+        return;
+    }
+
+    usuarios.push({ nombre: nom, email: cor, password: p1 });
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    mostrarMensaje("✔ Registro exitoso. Ahora inicia sesión.", "success");
+});
+
+// CAMBIO ENTRE LOGIN / REGISTRO / RECUPERAR
+document.querySelector("#tabLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+
+    tabLogin.classList.add("tab-active");
+    tabReg.classList.remove("tab-active");
+});
+
+document.querySelector("#tabReg").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "block";
+    formRecuperar.style.display = "none";
+
+    tabReg.classList.add("tab-active");
+    tabLogin.classList.remove("tab-active");
+});
+
+document.querySelector("#recuperarLink").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "block";
+});
+
+document.querySelector("#volverLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+});
+
+// COLAPSAR/EXPANDIR CONTRASEÑA
+document.querySelector("#togglePass").addEventListener("click", () => {
+    const pass = document.querySelector("#password");
+    if (pass.type === "password") {
+        pass.type = "text";
+        togglePass.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        pass.type = "password";
+        togglePass.classList.replace("bi-eye-slash", "bi-eye");
+    }
+});
+</script>
+
+<!-- SCRIPT UNIVERSAL DE SESIÓN -->
+<script>
+const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+const loginItem = document.querySelector("#navLogin");
+const usuarioItem = document.querySelector("#navUsuario");
+const usuarioLink = usuarioItem ? usuarioItem.querySelector("a") : null;
+const logoutItem = document.querySelector("#navLogout");
+
+if (usuario) {
+    if (loginItem) loginItem.style.display = "none";
+    if (usuarioItem) usuarioItem.style.display = "block";
+    if (usuarioLink) usuarioLink.textContent = "Hola, " + usuario.nombre.split(" ")[0];
+    if (logoutItem) logoutItem.style.display = "block";
+} else {
+    if (usuarioItem) usuarioItem.style.display = "none";
+    if (logoutItem) logoutItem.style.display = "none";
+}
+
+// Logout
+if (logoutItem) {
+    logoutItem.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActual");
+        window.location.href = "Login.html";
+    });
+}
+</script>
+<!-- SCRIPT PARA FUNCIONALIDAD -->
+<script>
+    // Expand/collapse
+    const expandButtons = document.querySelectorAll(".expand-btn");
+
+    expandButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const content = btn.nextElementSibling;
+
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                btn.innerHTML = '<i class="bi bi-arrow-down"></i> Ver más';
+            } else {
+                content.style.display = "block";
+                btn.innerHTML = '<i class="bi bi-arrow-up"></i> Ver menos';
+            }
+        });
+    });
+
+    // Chips (filters)
+    const chips = document.querySelectorAll(".chip");
+    const noticias = document.querySelectorAll(".noticia-item");
+
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+
+            document.querySelector(".chip.active").classList.remove("active");
+            chip.classList.add("active");
+
+            const filter = chip.dataset.filter;
+
+            noticias.forEach(noticia => {
+                if (filter === "Nuevo") {
+                    noticia.style.display = "block";
+                } else {
+                    noticia.style.display = noticia.dataset.category === filter ? "block" : "none";
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

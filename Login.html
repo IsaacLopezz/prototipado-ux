@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login SINAC</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --sinac-green: #4CAF50;
+            --sinac-green-dark: #0a8a60;
+        }
+
+        body {
+            background: url("imagenes/fondo_bosque.png");
+            background-size: cover;
+            background-attachment: fixed;
+            backdrop-filter: blur(2px);
+            margin: 0;
+        }
+
+        .login-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 380px;
+            border-radius: 15px;
+            padding: 25px;
+            background: white;
+            box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-btn {
+            width: 50%;
+            border-radius: 10px;
+            font-weight: 600;
+            padding: 8px;
+        }
+
+        .tab-active {
+            background: var(--sinac-green);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="imagenes/sinac_logo.png" style="height:33px;" class="me-2">
+            <span class="fw-semibold text-sinac fs-5">SINAC</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-3">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Nosotros.html">Nosotros</a>
+                </li>
+<!-- DROPDOWN (ÚNICO DROPDOWN) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Áreas de Conservación
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="Áreas de Conservación-pag.html">Ver Todas las Áreas</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAHN">Arenal Huetar Norte</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACAT">Arenal Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACCVC">Cordillera Volcánica Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACG">Guanacaste</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAC">La Amistad Caribe</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACLAP">La Amistad Pacífico</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACMIC">Isla del Coco</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOSA">Osa</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACOPAC">Pacífico Central</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACT">Tempisque</a></li>
+<li><a class="dropdown-item" href="Áreas de Conservación-pag.html?area=ACTO">Tortuguero</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Servicios.html">Trámites y Servicios</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Noticias.html">Noticias</a>
+                </li>
+
+                        <!-- Visible solo si NO hay sesión -->
+                <li class="nav-item" id="navLogin">
+                    <a class="nav-link" href="Login.html">Iniciar Sesión</a>
+                </li>
+
+                <!-- Visible cuando SÍ hay sesión -->
+                <li class="nav-item" id="navUsuario" style="display:none;">
+                    <a class="nav-link disabled fw-semibold" href="#"></a>
+                </li>
+
+                <!-- Botón de cerrar sesión -->
+                <li class="nav-item" id="navLogout" style="display:none;">
+                    <a class="nav-link text-danger" href="#">Cerrar Sesión</a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex ms-auto" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <div class="text-center mb-2">
+            <img src="imagenes/sinac_logo.png" style="height:60px" class="mb-2">
+            <p class="text-secondary">Sistema Nacional de Áreas de Conservación</p>
+        </div>
+
+        <!-- TABS -->
+        <div class="d-flex mt-2 mb-3">
+            <button id="tabLogin" class="btn tab-btn tab-active">Inicia Sesión</button>
+            <button id="tabReg" class="btn tab-btn ms-2">Regístrate</button>
+        </div>
+
+        <!-- ALERTA -->
+        <div id="alerta" class="alert d-none"></div>
+
+        <!-- FORM LOGIN -->
+        <div id="formLogin">
+            <label>Email</label>
+            <input type="email" id="email" class="form-control mb-3">
+
+            <label>Contraseña</label>
+            <div class="input-group mb-1">
+                <input type="password" id="password" class="form-control">
+                <span class="input-group-text bg-white" style="cursor:pointer;">
+                    <i id="togglePass" class="bi bi-eye"></i>
+                </span>
+            </div>
+
+            <a href="#" id="recuperarLink" class="small" style="color:var(--sinac-green-dark);">¿Olvidaste tu contraseña?</a>
+
+            <button id="btnLogin" class="btn w-100 text-white mt-3" style="background:var(--sinac-green-dark);">
+                Iniciar Sesión
+            </button>
+        </div>
+
+        <!-- FORM REGISTRO -->
+        <div id="formRegistro" style="display:none;">
+            <label>Nombre</label>
+            <input type="text" id="regNombre" class="form-control mb-2">
+
+            <label>Correo</label>
+            <input type="email" id="regCorreo" class="form-control mb-2">
+
+            <label>Contraseña</label>
+            <input type="password" id="regPass1" class="form-control mb-2">
+
+            <label>Confirmar Contraseña</label>
+            <input type="password" id="regPass2" class="form-control mb-3">
+
+            <button id="btnRegistro" class="btn w-100 text-white" style="background:var(--sinac-green);">
+                Crear Cuenta
+            </button>
+        </div>
+
+        <!-- FORM RECUPERAR -->
+        <div id="formRecuperar" style="display:none;">
+            <label>Correo registrado</label>
+            <input type="email" id="recCorreo" class="form-control mb-3">
+
+            <button id="btnRecuperar" class="btn w-100 text-white" style="background:var(--sinac-green-dark);">
+                Enviar enlace de recuperación
+            </button>
+
+            <button id="volverLogin" class="btn btn-link w-100 mt-2">
+                Volver al inicio de sesión
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- --------------------------- -->
+<!-- SCRIPTS DEL LOGIN COMPLETO -->
+<!-- --------------------------- -->
+
+<script>
+// Base simulada
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
+    { email: "admin@sinac.go.cr", password: "123456", nombre: "Administrador SINAC" },
+    { email: "usuario@correo.com", password: "sinac2024", nombre: "Usuario General" }
+];
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+// Mostrar alerta
+function mostrarMensaje(msg, tipo="danger") {
+    const alerta = document.querySelector("#alerta");
+    alerta.className = "alert alert-" + tipo;
+    alerta.textContent = msg;
+    alerta.style.display = "block";
+}
+
+// LOGIN
+document.querySelector("#btnLogin").addEventListener("click", function() {
+    const email = document.querySelector("#email").value;
+    const pass = document.querySelector("#password").value;
+
+    const userFound = usuarios.find(u => u.email === email && u.password === pass);
+
+    if (!userFound) {
+        mostrarMensaje("❌ Credenciales incorrectas.");
+        return;
+    }
+
+    localStorage.setItem("usuarioActual", JSON.stringify(userFound));
+    window.location.href = "index.html";
+});
+
+// REGISTRO
+document.querySelector("#btnRegistro").addEventListener("click", function() {
+    const nom = document.querySelector("#regNombre").value;
+    const cor = document.querySelector("#regCorreo").value;
+    const p1 = document.querySelector("#regPass1").value;
+    const p2 = document.querySelector("#regPass2").value;
+
+    if (p1 !== p2) {
+        mostrarMensaje("❌ Las contraseñas no coinciden.");
+        return;
+    }
+
+    if (usuarios.find(u => u.email === cor)) {
+        mostrarMensaje("❌ El correo ya existe.");
+        return;
+    }
+
+    usuarios.push({ nombre: nom, email: cor, password: p1 });
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    mostrarMensaje("✔ Registro exitoso. Ahora inicia sesión.", "success");
+});
+
+// CAMBIO ENTRE LOGIN / REGISTRO / RECUPERAR
+document.querySelector("#tabLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+
+    tabLogin.classList.add("tab-active");
+    tabReg.classList.remove("tab-active");
+});
+
+document.querySelector("#tabReg").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "block";
+    formRecuperar.style.display = "none";
+
+    tabReg.classList.add("tab-active");
+    tabLogin.classList.remove("tab-active");
+});
+
+document.querySelector("#recuperarLink").addEventListener("click", () => {
+    formLogin.style.display = "none";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "block";
+});
+
+document.querySelector("#volverLogin").addEventListener("click", () => {
+    formLogin.style.display = "block";
+    formRegistro.style.display = "none";
+    formRecuperar.style.display = "none";
+});
+
+// COLAPSAR/EXPANDIR CONTRASEÑA
+document.querySelector("#togglePass").addEventListener("click", () => {
+    const pass = document.querySelector("#password");
+    if (pass.type === "password") {
+        pass.type = "text";
+        togglePass.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        pass.type = "password";
+        togglePass.classList.replace("bi-eye-slash", "bi-eye");
+    }
+});
+</script>
+
+<!-- SCRIPT UNIVERSAL DE SESIÓN -->
+<script>
+const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+const loginItem = document.querySelector("#navLogin");
+const usuarioItem = document.querySelector("#navUsuario");
+const usuarioLink = usuarioItem ? usuarioItem.querySelector("a") : null;
+const logoutItem = document.querySelector("#navLogout");
+
+if (usuario) {
+    if (loginItem) loginItem.style.display = "none";
+    if (usuarioItem) usuarioItem.style.display = "block";
+    if (usuarioLink) usuarioLink.textContent = "Hola, " + usuario.nombre.split(" ")[0];
+    if (logoutItem) logoutItem.style.display = "block";
+} else {
+    if (usuarioItem) usuarioItem.style.display = "none";
+    if (logoutItem) logoutItem.style.display = "none";
+}
+
+// Logout
+if (logoutItem) {
+    logoutItem.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActual");
+        window.location.href = "Login.html";
+    });
+}
+</script>
+
+</body>
+</html>
